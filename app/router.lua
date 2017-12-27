@@ -12,7 +12,7 @@ return function(app)
 
 	-- test
 	-- group router mapping a coarse-grained client request
-	app:get("/test", testRouter())
+	app:use("/test", testRouter())
 	-- a default error handler for a group router
 	app:erruse("/test", testErrHandler())
 
