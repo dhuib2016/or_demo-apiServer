@@ -1,7 +1,7 @@
 local testRouter = require("routes.test")
-local testHandler = require("modules.test.errHandler")
+local testErrHandler = require("modules.test.errHandler")
 local userRouter = require("routes.user")
-local errHandler = require("modules.user.errHandler")
+local userErrHandler = require("modules.user.errHandler")
 
 return function(app)
     -- special router
@@ -14,10 +14,10 @@ return function(app)
 	-- group router mapping a coarse-grained client request
 	app:get("/test", testRouter())
 	-- a default error handler for a group router
-	app:erruse("/test", testHandler())
+	app:erruse("/test", testErrHandler())
 
 	-- user
     app:use("/user", userRouter())
-	app:erruse("/user", errHandler())
+	app:erruse("/user", userErrHandler())
 end
 
