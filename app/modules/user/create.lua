@@ -13,6 +13,7 @@ return function()
 		local creatIdResp = dispatch(serverName, creatIdReq)
 		if not creatIdResp then
 			res:status(ngx.HTTP_INTERNAL_SERVER_ERROR):send("create id failed!")
+			return
 		end
 
 		local createNameReq = {
@@ -26,6 +27,7 @@ return function()
 		if not createNameResp then
 			-- todo: think about rollback
 			res:status(ngx.HTTP_INTERNAL_SERVER_ERROR):send("create name failed!")
+			return
 		end
 
 	    -- todo:check ngx default status
