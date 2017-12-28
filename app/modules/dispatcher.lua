@@ -1,5 +1,4 @@
 local Socket = require("share.libs.net.index")
-local TcpSocket = Socket("tcpClient")
 local cjson = require("cjson.safe")
 local servAddrResv = require("modules.utils.serverAddressResolve")
 
@@ -33,6 +32,7 @@ return function(serverName, request)
 		return nil
 	end
 
+	local TcpSocket = Socket("tcpClient")
 	local jResp, respErr = TcpSocket(servAddr.ip, servAddr.port, jReq)
 	if not jResp then
 		ngx.log(ngx.ERR, "dispatch failed: ", respErr)
