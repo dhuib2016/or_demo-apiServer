@@ -1,3 +1,7 @@
+-- function reference
+local log = ngx.log
+local ERR = ngx.ERR
+-- include
 local Socket = require("share.libs.net.index")
 local cjson = require("cjson.safe")
 local servAddrResv = require("modules.utils.serverAddressResolve")
@@ -22,26 +26,26 @@ local servAddrResv = require("modules.utils.serverAddressResolve")
 return function(serverName, request)
 	local servAddr = servAddrResv(serverName)
 	if not servAddr then
-		ngx.log(ngx.ERR, "invalid server name: ", serverName)
+		log(ERR, "invalid server name: ", serverName)
 		return nil
 	end
 
 	local jReq, enErr = cjson.encode(request)
 	if not jReq then
-		ngx.log(ngx.ERR, "encode request failed: ", enErr)
+		log(ERR, "encode request failed: ", enErr)
 		return nil
 	end
 
 	local TcpSocket = Socket("tcpClient")
 	local jResp, respErr = TcpSocket(servAddr.ip, servAddr.port, jReq)
 	if not jResp then
-		ngx.log(ngx.ERR, "dispatch failed: ", respErr)
+		log(ERR, "dispatch failed: ", respErr)
 		return nil
 	end
 
 	local resp, deErr = cjson.decode(jResp)
 	if not resp then
-		ngx.log(ngx.ERR, "decode response failed: ", deErr)
+		log(ERR, "decode response failed: ", deErr)
 		return nil
 	end
 

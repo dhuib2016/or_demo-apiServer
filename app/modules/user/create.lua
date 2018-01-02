@@ -1,3 +1,7 @@
+-- function reference
+local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
+local HTTP_CREATED = ngx.HTTP_CREATED
+-- include
 local msgDef = require("share.src.messageDefine")
 local dispatch = require("modules.dispatcher")
 
@@ -12,7 +16,7 @@ return function()
 		local serverName = "idServer"
 		local creatIdResp = dispatch(serverName, creatIdReq)
 		if not creatIdResp then
-			res:status(ngx.HTTP_INTERNAL_SERVER_ERROR):send("create id failed!")
+			res:status(HTTP_INTERNAL_SERVER_ERROR):send("create id failed!")
 			return
 		end
 
@@ -26,11 +30,11 @@ return function()
 		local createNameResp = dispatch(serverName, createNameReq)
 		if not createNameResp then
 			-- todo: think about rollback
-			res:status(ngx.HTTP_INTERNAL_SERVER_ERROR):send("create name failed!")
+			res:status(HTTP_INTERNAL_SERVER_ERROR):send("create name failed!")
 			return
 		end
 
 	    -- todo:check ngx default status
-	    res:status(ngx.HTTP_CREATED):send("create succ!")
+	    res:status(HTTP_CREATED):send("create succ!")
     end
 end
