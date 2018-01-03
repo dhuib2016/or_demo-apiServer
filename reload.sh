@@ -16,11 +16,9 @@ else
     PROFILE=dev
 fi
 
-mkdir -p logs & mkdir -p tmp
-baklogs="old_logs/$(date +'%Y%m%d%H%M%S')"
+baklogs="logs/old_logs/$(date +'%Y%m%d_%H%M%S')"
 mkdir -p ${baklogs}
 mv ./logs/*.* ${baklogs}/
 
 echo "reload lor application with profile: "${PROFILE}
-#nginx -s reload -p `pwd`/ -c conf/nginx-${PROFILE}.conf
 kill -HUP $(cat $(pwd)/tmp/${PROFILE}-nginx.pid)

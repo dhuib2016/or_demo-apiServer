@@ -18,3 +18,7 @@ fi
 
 echo "stop lor application with profile: "${PROFILE}
 nginx -s quit -p `pwd`/ -c conf/nginx-${PROFILE}.conf
+
+baklogs="logs/old_logs/$(date +'%Y%m%d_%H%M%S')"
+mkdir -p ${baklogs}
+mv ./logs/*.* ${baklogs}/
