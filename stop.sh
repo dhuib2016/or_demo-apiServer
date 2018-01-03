@@ -16,6 +16,5 @@ else
     PROFILE=dev
 fi
 
-mkdir -p logs & mkdir -p tmp
 echo "stop lor application with profile: "${PROFILE}
 nginx -s quit -p `pwd`/ -c conf/nginx-${PROFILE}.conf
