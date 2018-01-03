@@ -17,9 +17,6 @@ else
 fi
 
 mkdir -p logs & mkdir -p tmp
-baklogs="old_logs/$(date +'%Y%m%d%H%M%S')"
-mkdir -p ${baklogs}
-mv ./logs/*.* ${baklogs}/
 
 echo "start lor application with profile: "${PROFILE}
 nginx -p `pwd`/ -c conf/nginx-${PROFILE}.conf
