@@ -16,7 +16,9 @@ else
     PROFILE=dev
 fi
 
+# todo:check $1 with ${PROFILE}-nginx.pid
+
 mkdir -p logs & mkdir -p tmp
 
 echo "start lor application with profile: "${PROFILE}
-openresty -p `pwd`/ -c conf/nginx-${PROFILE}.conf
+openresty-dev -p `pwd`/ -c conf/nginx-${PROFILE}.conf

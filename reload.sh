@@ -16,6 +16,8 @@ else
     PROFILE=dev
 fi
 
+# todo:check $1 with ${PROFILE}-nginx.pid
+
 baklogs="logs/old_logs/$(date +'%Y%m%d_%H%M%S')"
 mkdir -p ${baklogs}
 mv ./logs/*.* ${baklogs}/
