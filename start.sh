@@ -19,4 +19,4 @@ fi
 mkdir -p logs & mkdir -p tmp
 
 echo "start lor application with profile: "${PROFILE}
-nginx -p `pwd`/ -c conf/nginx-${PROFILE}.conf
+openresty -p `pwd`/ -c conf/nginx-${PROFILE}.conf
