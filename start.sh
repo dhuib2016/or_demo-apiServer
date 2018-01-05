@@ -10,6 +10,8 @@
 # sh start.sh -- use conf/nginx-dev.conf to start OpenResty
 #####################################################################
 
+export PATH=$PATH:/home/cuis/OR/bin
+
 if [ -n "$1" ];then
     PROFILE="$1"
 else
@@ -21,4 +23,4 @@ fi
 mkdir -p logs & mkdir -p tmp
 
 echo "start lor application with profile: "${PROFILE}
-openresty-dev -p `pwd`/ -c conf/nginx-${PROFILE}.conf
+openresty -p `pwd`/ -c conf/nginx-${PROFILE}.conf

@@ -2,22 +2,22 @@
 local serverMap = {
 	testServer1 = {
 		ip = "127.0.0.1",
-		port = 9525
+		port = 19525
 	},
 
 	testServer2 = {
 		ip = "127.0.0.1",
-		port = 9526
+		port = 19526
 	},
 
 	idServer = {
 		ip = "127.0.0.1",
-		port = 9527
+		port = 19527
 	},
 
 	nameServer = {
 		ip = "127.0.0.1",
-		port = 9528
+		port = 19528
 	}
 }
 

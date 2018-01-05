@@ -10,6 +10,8 @@
 # sh stop.sh -- use conf/nginx-dev.conf to stop OpenResty
 #####################################################################
 
+export PATH=$PATH:/home/cuis/OR/bin
+
 if [ -n "$1" ];then
     PROFILE="$1"
 else
@@ -19,7 +21,7 @@ fi
 # todo:check $1 with ${PROFILE}-nginx.pid
 
 echo "stop lor application with profile: "${PROFILE}
-openresty-dev -s quit -p `pwd`/ -c conf/nginx-${PROFILE}.conf
+openresty -s quit -p `pwd`/ -c conf/nginx-${PROFILE}.conf
 
 baklogs="logs/old_logs/$(date +'%Y%m%d_%H%M%S')"
 mkdir -p ${baklogs}
