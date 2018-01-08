@@ -1,5 +1,9 @@
+-- function reference
+local log = ngx.log
+local WARN = ngx.WARN
+
 return function()
 	return function(err)
-		ngx.log(ngx.ERR, "/user err: ", err)
+		log(WARN, "/user err: ", err)
 	end
 end
