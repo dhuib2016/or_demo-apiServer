@@ -10,7 +10,9 @@
 # sh start.sh -- use conf/nginx-dev.conf to start OpenResty
 #####################################################################
 
+#LD_PRELOAD=/home/cuis/Dep/glibc-build-2.14/libc.so.6
 export PATH=$PATH:/home/cuis/OR/bin
+export LD_LIBRARY_PATH=/home/cuis/Dep/glibc-build-2.14
 
 if [ -n "$1" ];then
     PROFILE="$1"
