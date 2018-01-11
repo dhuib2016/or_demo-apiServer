@@ -2,7 +2,7 @@
 local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
 local HTTP_CREATED = ngx.HTTP_CREATED
 -- include
-local msgDef = require("share.src.messageDefine")
+local msgDef = require("src.define.messageDefine")
 local dispatch = require("modules.dispatcher")
 
 return function()
