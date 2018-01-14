@@ -2,14 +2,14 @@
 local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
 local HTTP_CREATED = ngx.HTTP_CREATED
 -- include
-local msgDef = require("src.define.messageDefine")
+local msgDef = require("src.define.message")
 local dispatch = require("modules.dispatcher")
 
 return function()
     return function(req, res)
 		local pingReq = {
 		    id = msgDef.MESSAGE_PING,
-		    content = {
+		    body = {
 			    seq = req.query.seq
 		    }
 	    }

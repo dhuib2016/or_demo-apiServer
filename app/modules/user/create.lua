@@ -2,14 +2,14 @@
 local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
 local HTTP_CREATED = ngx.HTTP_CREATED
 -- include
-local msgDef = require("src.define.messageDefine")
+local msgDef = require("src.define.message")
 local dispatch = require("modules.dispatcher")
 
 return function()
     return function(req, res)
 		local creatIdReq = {
 		    id = msgDef.MESSAGE_CREATE_ID,
-		    content = {
+		    body = {
 			    id = req.query.id
 		    }
 	    }
@@ -22,7 +22,7 @@ return function()
 
 		local createNameReq = {
 		    id = msgDef.MESSAGE_CREATE_NAME,
-		    content = {
+		    body = {
 			    name = req.query.name
 		    }
 	    }
