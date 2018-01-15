@@ -8,7 +8,7 @@ local schedule = require("scheduler.index")
 
 return function()
     return function(req, res)
-        local mode = cstDef.DISPATCH_MODE.TCP
+        local mode = cstDef.DISPATCH_MODE.MESSAGE.TCP
 		local pingReq = {
 		    id = msgDef.MESSAGE_PING,
 		    body = {
