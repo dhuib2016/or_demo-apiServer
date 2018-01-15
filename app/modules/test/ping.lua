@@ -10,7 +10,7 @@ return function()
     return function(req, res)
         local mode = cstDef.DISPATCH_MODE.MESSAGE.TCP
 		local content = {}
-        content.pingReq = {
+        content.request = {
 		    id = msgDef.MESSAGE_PING,
 		    body = {
 			    seq = req.query.seq
