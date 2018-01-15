@@ -29,16 +29,16 @@ return function(mode, content)
         -- make functions
     else
         -- serial
-        local serverName, request
+        local address, request
         if size == 1 then
-            serverName = content[1][1]
-            request = content[1][2]
+            address = content[1].address
+            request = content[1].request
         else
-            serverName = content[1]
-            request = content[2]
+            address = content.address
+            request = content.request
         end
 
-        local resp, err = dispatcher(serverName, request)
+        local resp, err = dispatcher(address, request)
         if err then
             log(WARN, "dispatch failed: ", err)
         end
