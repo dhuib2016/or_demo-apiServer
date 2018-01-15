@@ -7,12 +7,12 @@ local servAddrResv = require("scheduler.dispatcher.serverAddressResolve")
 
 return function(serverName, request)
     if type(request) ~= "table" or not next(request) then
-		return nil, "invalid server request: "..request
+		return nil, "invalid server request"
     end
 
 	local servAddr = servAddrResv(serverName)
 	if not servAddr then
-		return nil, "invalid server name: "..serverName
+		return nil, "invalid server name"
 	end
 
 	local tcpDispatcher = socket("tcpClient")
