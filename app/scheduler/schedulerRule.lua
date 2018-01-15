@@ -1,5 +1,5 @@
 local cstDef = require("src.define.const")
-local httpDispatcher = nil
+local httpDispatcher = require("scheduler.dispatcher.message.http")
 local tcpDispatcher = require("scheduler.dispatcher.message.tcp")
 
 return {
