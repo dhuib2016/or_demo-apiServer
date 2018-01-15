@@ -1,34 +1,26 @@
 -- function reference
 local type = type
 local next = next
-local log = ngx.log
-local WARN = ngx.WARN
 -- include
-local Socket = require("share.libs.net.index")
+local socket = require("share.libs.net.index")
 local servAddrResv = require("scheduler.dispatcher.serverAddressResolve")
 
 return function(serverName, request)
     if type(request) ~= "table" or not next(request) then
-        log(WARN, "invalid server request: ", request)
-		return nil
+		return nil, "invalid server request: "..request
     end
 
 	local servAddr = servAddrResv(serverName)
 	if not servAddr then
-		log(WARN, "invalid server name: ", serverName)
-		return nil
+		return nil, "invalid server name: "..serverName
 	end
 
-	local TcpSocket = Socket("tcpClient")
-	local resp, respErr = TcpSocket(servAddr.ip, servAddr.port, request)
+	local tcpDispatcher = socket("tcpClient")
+	local resp, respErr = tcpDispatcher(servAddr.ip, servAddr.port, request)
 	if not resp then
-		log(WARN, "dispatch failed: ", respErr)
-		return nil
+		return nil, "tcp dispatch failed: "..respErr
 	end
 
-	if respErr then
-		log(WARN, respErr)
-	end
-
-	return resp
+    -- maybe there is a warn in tcpDispatcher's return
+	return resp, respErr
 end

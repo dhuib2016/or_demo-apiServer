@@ -9,6 +9,7 @@ local rule = require("scheduler.schedulerRule")
 --[[
     mode see src.define.const.DISPATCH_MODE
     if content is more than one request, it will take parallel mode
+    todo:think about return error code
     ]]
 return function(mode, content)
     local dispatcher = rule[mode]
@@ -37,6 +38,11 @@ return function(mode, content)
             request = content.request
         end
 
-        return dispatcher(serverName, request)
+        local resp, err = dispatcher(serverName, request)
+        if err then
+            log(WARN, "dispatch failed: ", err)
+        end
+
+        return resp
     end
 end
