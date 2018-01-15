@@ -31,11 +31,11 @@ return function(mode, content)
         -- serial
         local serverName, request
         if size == 1 then
-            serverName = content[1].serverName
-            request = content[1].request
+            serverName = content[1][1]
+            request = content[1][2]
         else
-            serverName = content.serverName
-            request = content.request
+            serverName = content[1]
+            request = content[2]
         end
 
         local resp, err = dispatcher(serverName, request)
