@@ -16,7 +16,7 @@ return function()
 			    id = req.query.id
 		    }
 	    }
-        content.address = "idServer"
+        content.serverName = "idServer"
 		local creatIdResp = schedule(mode, content)
 		if not creatIdResp then
 			res:status(HTTP_INTERNAL_SERVER_ERROR):send("create id failed!")
@@ -29,7 +29,7 @@ return function()
 			    name = req.query.name
 		    }
 	    }
-        content.address = "nameServer"
+        content.serverName = "nameServer"
 		local createNameResp = schedule(mode, content)
 		if not createNameResp then
 			-- todo: think about rollback
