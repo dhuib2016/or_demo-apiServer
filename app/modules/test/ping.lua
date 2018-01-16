@@ -24,6 +24,6 @@ return function()
 		end
 
 	    -- todo:check ngx default status
-	    res:status(HTTP_CREATED):send("create succ!")
+	    res:status(HTTP_OK):send("create succ!")
     end
 end
