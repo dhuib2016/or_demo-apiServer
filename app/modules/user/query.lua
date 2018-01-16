@@ -48,7 +48,7 @@ return function()
 		    id = msgDef.MESSAGE_QUERY_ID,
 		    body = {}
 	    }
-        c1.address = "idServer"
+        c1.serverName = "idServer"
         local idQueryIndex = 1
         contents[idQueryIndex] = c1
         local c2 = {}
@@ -56,7 +56,7 @@ return function()
 		    id = msgDef.MESSAGE_QUERY_NAME,
 		    body = {}
 	    }
-        c2.address = "nameServer"
+        c2.serverName = "nameServer"
         local nameQueryIndex = 2
         contents[nameQueryIndex] = c2
 
