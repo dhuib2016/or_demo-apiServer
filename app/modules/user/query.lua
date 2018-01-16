@@ -1,6 +1,8 @@
 -- function reference
 local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
 local HTTP_OK = ngx.HTTP_OK
+local log = ngx.log
+local WARN = ngx.WARN
 -- include
 local cstDef = require("src.define.const")
 local msgDef = require("src.define.message")
@@ -30,13 +32,26 @@ return function()
 
 		local resps = schedule(mode, contents)
         local idQueryResp = resps[idQueryIndex]
+        local idQueryRespContent = idQueryResp[1]
+        local idQueryRespErr = idQueryResp[2]
         local nameQueryResp = resps[nameQueryIndex]
-        if idQueryResp.code == ec.SUCC and nameQueryResp.code == ec.SUCC then
-            local resContent = "id:"..idQueryResp.body.id
-            resContent = resContent..", name:"..nameQueryResp.body.name
-            return res:status(HTTP_OK):send(resContent)
+        local nameQueryRespContent = nameQueryResp[1]
+        local nameQueryRespErr = nameQueryResp[2]
+        if idQueryRespContent and idQueryRespContent.code == ec.SUCC
+            and nameQueryRespContent and nameQueryResp.code == ec.SUCC then
+            local resContent = "id:"..idQueryRespContent.body.id
+            resContent = resContent..", name:"..nameQueryRespContent.body.name
+            res:status(HTTP_OK):send(resContent)
         else
-			return res:status(HTTP_INTERNAL_SERVER_ERROR):send("query failed!")
+			res:status(HTTP_INTERNAL_SERVER_ERROR):send("query failed!")
 		end
+
+        if idQueryRespErr then
+            log(WARN, "id query err: ", idQueryRespErr)
+        end
+
+        if nameQueryRespErr then
+            log(WARN, "name query err: ", nameQueryRespErr)
+        end
     end
 end
