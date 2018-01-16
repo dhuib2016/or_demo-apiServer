@@ -3,56 +3,22 @@ local type = type
 local next = next
 local log = ngx.log
 local WARN = ngx.WARN
-local spawn = ngx.thread.spawn
-local wait = ngx.thread.wait
 -- include
 local cstDef = require("src.define.const")
 local rule = require("scheduler.schedulerRule")
-
-local parallelHandler = function(dispatcher, content)
-    local threads = {}
-    local i = 1
-    for _, v in ipairs(content) do
-        threads[i] = spawn(dispatcher, v.address, v.request)
-        i = i + 1
-    end
-
-    local results = {}
-    local j = 1
-    for _, t in ipairs(threads) do
-        local ok, res = wait(t)
-        if not ok then
-            log(WARN, "parallel dispatche failed: ", res)
-            results[j] = {}
-        else
-            results[j] = res
-        end
-        j = j + 1
-    end
-
-    return results
-end
+local parallel = require("src.toolkit.flowCtrl.parallel")
 
 local parallelHTTPHandler = function(content)
     return nil
 end
 
 local serialHandler = function(size, dispatcher, content)
-    local address, request
+    local c = content
     if size == 1 then
-        address = content[1].address
-        request = content[1].request
-    else
-        address = content.address
-        request = content.request
+        c = content[1]
     end
 
-    local resp, err = dispatcher(address, request)
-    if err then
-        log(WARN, "dispatch failed: ", err)
-    end
-
-    return resp
+    return dispatcher(c)
 end
 
 --[[
@@ -79,9 +45,15 @@ return function(mode, content)
             -- http use capture_multi
             return parallelHTTPHandler(content)
         end
-        return parallelHandler(dispatcher, content)
+
+        local ret, err = parallel(dispatcher, content)
+        if not ret then
+            log(WARN, "invalid parallel flow: ", err)
+        end
+
+        return ret
     else
         -- serial
-        return  serialHandler(size, dispatcher, content)
+        return serialHandler(size, dispatcher, content)
     end
 end
