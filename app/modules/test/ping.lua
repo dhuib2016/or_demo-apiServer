@@ -16,7 +16,7 @@ return function()
 			    seq = req.query.seq
 		    }
 	    }
-        content.address = "testServer1"
+        content.serverName = "testServer1"
 		local pingResp = schedule(mode, content)
 		if not pingResp then
 			res:status(HTTP_INTERNAL_SERVER_ERROR):send("ping failed!")
