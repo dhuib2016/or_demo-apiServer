@@ -19,7 +19,7 @@ else
     PROFILE=dev
 fi
 
-# todo:check $1 with ${PROFILE}-nginx.pid
+# todo:check $1 with ${PROFILE}-nginx.conf
 
 mkdir -p logs & mkdir -p tmp
 
