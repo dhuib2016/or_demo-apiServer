@@ -27,15 +27,5 @@ return function(params)
 	end
 
 	local tcpDispatcher = socket("tcpClient")
-	local resp, respErr = tcpDispatcher(servAddr.ip, servAddr.port, request)
-	if not resp then
-        log(WARN, "tcp dispatch failed: ", respErr)
-		return nil
-	end
-
-    if respErr then
-        log(WARN, "tcp dispatch warning: ", respErr)
-    end
-
-	return resp
+	return tcpDispatcher(servAddr.ip, servAddr.port, request)
 end

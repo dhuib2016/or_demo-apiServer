@@ -1,9 +1,9 @@
 local lor = require("lor.index")
 local userRouter = lor:Router()
 local create = require("modules.user.create")
-local query = require("modules.user.query")
+local createParallel = require("modules.user.createParallel")
 
 userRouter:post("/create", create())
-userRouter:get("/query", query())
+userRouter:post("/createPRL", createParallel())
 
 return userRouter

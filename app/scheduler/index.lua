@@ -46,12 +46,7 @@ return function(mode, content)
             return parallelHTTPHandler(content)
         end
 
-        local ret, err = parallel(dispatcher, content)
-        if not ret then
-            log(WARN, "invalid parallel flow: ", err)
-        end
-
-        return ret
+        return parallel(dispatcher, content)
     else
         -- serial
         return serialHandler(size, dispatcher, content)

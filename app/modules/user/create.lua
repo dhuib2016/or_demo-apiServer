@@ -37,7 +37,6 @@ return function()
 			return
 		end
 
-	    -- todo:check ngx default status
 	    res:status(HTTP_CREATED):send("create succ!")
     end
 end
