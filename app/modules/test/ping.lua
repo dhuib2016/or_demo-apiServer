@@ -1,6 +1,6 @@
 -- function reference
 local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
-local HTTP_CREATED = ngx.HTTP_CREATED
+local HTTP_OK = ngx.HTTP_OK
 -- include
 local cstDef = require("src.define.const")
 local msgDef = require("src.define.message")
