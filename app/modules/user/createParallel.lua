@@ -52,9 +52,9 @@ return function()
 			return
         end
 
-	    local createIdIdCode = createIdResp.code
+	    local createIdCode = createIdResp.code
         local createNameCode = createNameResp.code
-	    local resp = "createId Code:"..createIdIdCode
+	    local resp = "createId Code:"..createIdCode
         resp = resp.." createName Code:"..createNameCode
 	    res:status(HTTP_CREATED):send(resp)
     end
