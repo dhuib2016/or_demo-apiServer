@@ -24,6 +24,7 @@ return function()
 		end
 
 	    -- todo:check ngx default status
-	    res:status(HTTP_OK):send("create succ!")
+	    local resp = "code:"..pingResp.code.." response:"..pingResp.body.ack
+	    res:status(HTTP_OK):send(resp)
     end
 end
