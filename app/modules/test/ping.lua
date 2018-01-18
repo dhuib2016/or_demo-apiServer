@@ -5,6 +5,7 @@ local HTTP_OK = ngx.HTTP_OK
 local cstDef = require("src.define.const")
 local msgDef = require("src.define.message")
 local schedule = require("scheduler.index")
+local ec = require("src.define.errorCode")
 
 return function()
     return function(req, res)
@@ -24,7 +25,11 @@ return function()
 		end
 
 	    -- todo:check ngx default status
-	    local resp = "code:"..pingResp.code.." response:"..pingResp.body.ack
+        local code = pingResp.code
+	    local resp = "code:"..code
+        if code == ec.SUCC then
+            resp = resp.." response:"..pingResp.body.ack
+        end
 	    res:status(HTTP_OK):send(resp)
     end
 end
