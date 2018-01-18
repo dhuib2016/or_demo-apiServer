@@ -22,5 +22,5 @@ baklogs="logs/old_logs/$(date +'%Y%m%d_%H%M%S')"
 mkdir -p ${baklogs}
 mv ./logs/*.* ${baklogs}/
 
-echo "reload lor application with profile: "${PROFILE}
+echo "reload OR application with profile: "${PROFILE}
 kill -HUP $(cat $(pwd)/tmp/${PROFILE}-nginx.pid)
