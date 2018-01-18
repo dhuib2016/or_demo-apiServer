@@ -6,8 +6,8 @@ local userErrHandler = require("modules.user.errHandler")
 return function(app)
     -- special router
 	-- simple router ignore next
-    app:get("/hello", function(req, res)
-        res:send(req.path.." : hi! welcome to lor framework.")
+    app:get("/hi", function(_, res)
+        res:send("welcome to OR framework.")
     end)
 
 	-- test
