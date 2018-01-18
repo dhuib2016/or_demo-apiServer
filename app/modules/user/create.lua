@@ -17,8 +17,8 @@ return function()
 		    }
 	    }
         content.serverName = "idServer"
-		local creatIdResp = schedule(mode, content)
-		if not creatIdResp then
+		local createIdResp = schedule(mode, content)
+		if not createIdResp then
 			res:status(HTTP_INTERNAL_SERVER_ERROR):send("create id failed!")
 			return
 		end
@@ -37,6 +37,10 @@ return function()
 			return
 		end
 
-	    res:status(HTTP_CREATED):send("create succ!")
+        local createIdCode = createIdResp.code
+        local createNameCode = createNameResp.code
+	    local resp = "createId Code:"..createIdCode
+        resp = resp.." createName Code:"..createNameCode
+	    res:status(HTTP_CREATED):send(resp)
     end
 end

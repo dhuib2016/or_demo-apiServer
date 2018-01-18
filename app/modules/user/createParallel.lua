@@ -52,6 +52,10 @@ return function()
 			return
         end
 
-	    res:status(HTTP_CREATED):send("create succ!")
+	    local createIdIdCode = createIdResp.code
+        local createNameCode = createNameResp.code
+	    local resp = "createId Code:"..createIdIdCode
+        resp = resp.." createName Code:"..createNameCode
+	    res:status(HTTP_CREATED):send(resp)
     end
 end
