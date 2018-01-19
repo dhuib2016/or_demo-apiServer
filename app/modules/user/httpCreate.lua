@@ -3,6 +3,7 @@ local HTTP_OK = ngx.HTTP_OK
 local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
 local HTTP_CREATED = ngx.HTTP_CREATED
 local capture = ngx.location.capture
+local HTTP_POST = ngx.HTTP_POST
 local log = ngx.log
 local WARN = ngx.WARN
 
@@ -21,7 +22,7 @@ return function()
         end
 
         local createNameParams = {
-            method = "POST",
+            method = HTTP_POST,
             args = { name = req.query.name }
         }
         local createNameResp = capture("/createName", createNameParams)
