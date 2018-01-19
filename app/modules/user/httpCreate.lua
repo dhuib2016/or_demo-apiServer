@@ -10,7 +10,7 @@ local WARN = ngx.WARN
 return function()
     return function(req, res)
         local createIdParams = {
-            method = "POST",
+            method = HTTP_POST,
             args = { id = req.query.id }
         }
         local createIdResp = capture("/createId", createIdParams)
