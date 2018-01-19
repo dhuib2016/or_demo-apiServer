@@ -35,7 +35,7 @@ return function()
             return
         end
         log(WARN, "@@debug_info@@args:", args.data)
-        local pingResp = capture("/jumphttpTest", { body = args.data })
+        local pingResp = capture("/ping", { body = args.req })
         local status = pingResp.status
         if status ~= HTTP_OK then
             log(WARN, "capture failed: ", status)
