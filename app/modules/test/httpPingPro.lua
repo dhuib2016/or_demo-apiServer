@@ -38,7 +38,8 @@ return function()
 
         local httpc = http.new()
         local uri = "http://127.0.0.1:29527/ping"
-        local pingResp, pingErr = httpc:request_uri(uri, { args = args })
+        local params = { body = "seq = "..args.seq }
+        local pingResp, pingErr = httpc:request_uri(uri, params)
         if not pingResp then
             log(WARN, "ping failed: ", pingErr)
             res:status(HTTP_INTERNAL_SERVER_ERROR):send("ping failed!")
