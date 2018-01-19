@@ -8,7 +8,7 @@ local capture = ngx.location.capture
 --local cstDef = require("src.define.const")
 --local msgDef = require("src.define.message")
 --local schedule = require("scheduler.index")
-local ec = require("src.define.errorCode")
+--local ec = require("src.define.errorCode")
 
 return function()
     return function(_, res)
@@ -35,7 +35,7 @@ return function()
             return
         end
 
-        local pingResp = capture("/ping", { body = args })
+        local pingResp = capture("/ping", { args = args })
         local status = pingResp.status
         if status ~= HTTP_OK then
             log(WARN, "capture failed: ", status)
