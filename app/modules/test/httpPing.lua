@@ -35,7 +35,7 @@ return function()
             return
         end
 
-        local pingResp = capture("/ping", { args = args })
+        local pingResp = capture("/ping", { vars = { seq = args.seq } })
         local status = pingResp.status
         if status ~= HTTP_OK then
             log(WARN, "capture failed: ", status)
