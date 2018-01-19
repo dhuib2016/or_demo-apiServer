@@ -34,8 +34,8 @@ return function()
             res:status(HTTP_INTERNAL_SERVER_ERROR):send("ping failed!")
             return
         end
-        log(WARN, "@@debug_info@@args:", args.data)
-        local pingResp = capture("/ping", { body = args.req })
+
+        local pingResp = capture("/ping", { body = args })
         local status = pingResp.status
         if status ~= HTTP_OK then
             log(WARN, "capture failed: ", status)
@@ -43,12 +43,6 @@ return function()
             return
         end
 
-	    -- todo:check ngx default status
-        local code = pingResp.body.code
-	    local resp = "code:"..code
-        if code == ec.SUCC then
-            resp = resp.." response:"..pingResp.body.ack
-        end
-	    res:status(HTTP_OK):send(resp)
+	    res:status(HTTP_OK):send(pingResp.body)
     end
 end
