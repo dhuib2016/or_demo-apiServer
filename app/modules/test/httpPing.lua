@@ -3,6 +3,7 @@ local log = ngx.log
 local WARN = ngx.WARN
 local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
 local HTTP_OK = ngx.HTTP_OK
+--include
 local http = require("resty.http")
 
 return function()

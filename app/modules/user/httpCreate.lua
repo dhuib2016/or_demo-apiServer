@@ -2,37 +2,56 @@
 local HTTP_OK = ngx.HTTP_OK
 local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
 local HTTP_CREATED = ngx.HTTP_CREATED
-local capture = ngx.location.capture
-local HTTP_POST = ngx.HTTP_POST
 local log = ngx.log
 local WARN = ngx.WARN
+--include
+local http = require("resty.http")
 
 return function()
     return function(req, res)
+        local httpc = http.new()
+
+        local createIdUri = "http://127.0.0.1:29528/createId"
         local createIdParams = {
-            method = HTTP_POST,
-            args = { id = req.query.id }
+            method = "POST",
+            body = "id = "..req.query.id
         }
-        local createIdResp = capture("/createId", createIdParams)
-        local createIdStatus = createIdResp.status
-        if createIdStatus ~= HTTP_OK then
-            log(WARN, "capture create id failed: ", createIdStatus)
+        local createIdResp, createIdErr =
+            httpc:request_uri(createIdUri, createIdParams)
+        if not createIdResp then
+            log(WARN, "create id failed: ", createIdErr)
             res:status(HTTP_INTERNAL_SERVER_ERROR):send("create id failed!")
             return
         end
 
+        local createIdStatus = createIdResp.status
+        if createIdStatus ~= HTTP_OK then
+            log(WARN, "create id failed: ", createIdStatus)
+            res:status(HTTP_INTERNAL_SERVER_ERROR):send("create id failed!")
+            return
+        end
+
+        local createNameUri = "http://127.0.0.1:29529/createName"
         local createNameParams = {
-            method = HTTP_POST,
-            args = { name = req.query.name }
+            method = "POST",
+            args = "name = "..req.query.name
         }
-        local createNameResp = capture("/createName", createNameParams)
-        local createNameStatus = createNameResp.status
-        if createNameStatus ~= HTTP_OK then
-            log(WARN, "capture create name failed: ", createNameStatus)
+        local createNameResp, createNameErr =
+            httpc:request_uri(createNameUri, createNameParams)
+        if not createNameResp then
+            log(WARN, "create name failed: ", createNameErr)
             res:status(HTTP_INTERNAL_SERVER_ERROR):send("create name failed!")
             return
         end
 
-	    res:status(HTTP_CREATED):send(createIdResp.body..", "..createNameResp.body)
+        local createNameStatus = createNameResp.status
+        if createNameStatus ~= HTTP_OK then
+            log(WARN, "create id failed: ", createNameStatus)
+            res:status(HTTP_INTERNAL_SERVER_ERROR):send("create name failed!")
+            return
+        end
+
+        local resp = createIdResp.body..", "..createNameResp.body
+        res:status(HTTP_CREATED):send(resp)
     end
 end
