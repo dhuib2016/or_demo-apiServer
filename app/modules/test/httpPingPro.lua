@@ -38,7 +38,7 @@ return function()
 
         local httpc = http.new()
         local uri = "http://127.0.0.1:29527/ping"
-        local params = { body = "{ seq = "..args.seq.." }" }
+        local params = { body = "seq = "..args.seq }
         local pingResp, pingErr = httpc:request_uri(uri, params)
         if not pingResp then
             log(WARN, "ping failed: ", pingErr)
