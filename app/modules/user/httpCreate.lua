@@ -10,11 +10,12 @@ local http = require("resty.http")
 return function()
     return function(req, res)
         local httpc = http.new()
+        local params = req.query
 
         local createIdUri = "http://127.0.0.1:29528/createId"
         local createIdParams = {
             method = "POST",
-            body = "id = "..req.query.id
+            body = "id = "..params.id
         }
         local createIdResp, createIdErr =
             httpc:request_uri(createIdUri, createIdParams)
@@ -34,7 +35,7 @@ return function()
         local createNameUri = "http://127.0.0.1:29529/createName"
         local createNameParams = {
             method = "POST",
-            args = "name = "..req.query.name
+            args = "name = "..params.name
         }
         local createNameResp, createNameErr =
             httpc:request_uri(createNameUri, createNameParams)
