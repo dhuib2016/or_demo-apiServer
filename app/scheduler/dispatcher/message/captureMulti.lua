@@ -11,7 +11,8 @@ return function(params)
         return nil
     end
 
-	local rets = capture_multi(params)
+    -- unknow result count, use table
+	local rets = { capture_multi(params) }
     local resps = {}
     for i, ret in ipairs(rets) do
         local status = ret.status
