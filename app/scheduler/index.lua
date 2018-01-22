@@ -7,7 +7,7 @@ local WARN = ngx.WARN
 local cstDef = require("src.define.const")
 local rule = require("scheduler.schedulerRule")
 local parallel = require("src.toolkit.flowCtrl.parallel")
-local captureMultiDispatcher = require("scheduler.dispatcher.message.captureMultiDispatcher")
+local captureMultiDispatcher = require("scheduler.dispatcher.message.captureMulti")
 
 local serialHandler = function(size, dispatcher, content)
     local c = content
