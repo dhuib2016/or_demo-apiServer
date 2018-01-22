@@ -32,11 +32,8 @@ return function()
 			res:status(HTTP_INTERNAL_SERVER_ERROR):send("create name failed!")
 			return
 		end
-
-        local createIdCode = createIdResp.code
-        local createNameCode = createNameResp.code
-	    local resp = "createId Code:"..createIdCode
-        resp = resp.." createName Code:"..createNameCode
-	    res:status(HTTP_CREATED):send(resp)
+        
+        local resp = createIdResp.body..", "..createNameResp.body
+        res:status(HTTP_CREATED):send(resp)
     end
 end
