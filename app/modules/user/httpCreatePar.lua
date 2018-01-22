@@ -47,7 +47,7 @@ return function()
 			return
         end
 
-	    local resp = createIdResp.body..", "..createNameResp.body
+	    local resp = createIdResp..", "..createNameResp
         res:status(HTTP_CREATED):send(resp)
     end
 end
