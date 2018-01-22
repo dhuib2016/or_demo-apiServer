@@ -13,7 +13,7 @@ return function()
         local contents = {}
 
         local c1 = {}
-        c1[1] = "http://127.0.0.1:29528/createId"
+        c1[1] = "/createId"
         c1[2] = {
             method = HTTP_POST,
             args = { id = params.id }
@@ -22,7 +22,7 @@ return function()
         contents[createIdIndex] = c1
 
         local c2 = {}
-        c2[1] = "http://127.0.0.1:29529/createName"
+        c2[1] = "/createName"
         c2[2]= {
             method = HTTP_POST,
             args = { name = params.name }
