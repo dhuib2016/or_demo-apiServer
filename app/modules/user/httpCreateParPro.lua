@@ -1,4 +1,5 @@
 -- function reference
+local HTTP_POST = ngx.HTTP_POST
 local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
 local HTTP_CREATED = ngx.HTTP_CREATED
 -- include
@@ -14,8 +15,8 @@ return function()
         local c1 = {}
         c1[1] = "http://127.0.0.1:29528/createId"
         c1[2] = {
-            method = "POST",
-            body = "id = "..params.id
+            method = HTTP_POST,
+            body = { id = params.id }
         }
         local createIdIndex = 1
         contents[createIdIndex] = c1
@@ -23,8 +24,8 @@ return function()
         local c2 = {}
         c2[1] = "http://127.0.0.1:29529/createName"
         c2[2]= {
-            method = "POST",
-            args = "name = "..params.name
+            method = HTTP_POST,
+            args = { name = params.name }
         }
         local createNameIndex = 2
         contents[createNameIndex] = c2
