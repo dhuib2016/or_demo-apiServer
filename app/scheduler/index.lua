@@ -7,10 +7,7 @@ local WARN = ngx.WARN
 local cstDef = require("src.define.const")
 local rule = require("scheduler.schedulerRule")
 local parallel = require("src.toolkit.flowCtrl.parallel")
-
-local parallelHTTPHandler = function(content)
-    return nil
-end
+local captureMultiDispatcher = require("scheduler.dispatcher.message.captureMultiDispatcher")
 
 local serialHandler = function(size, dispatcher, content)
     local c = content
@@ -41,9 +38,9 @@ return function(mode, content)
     local size = #content
     if size > 1 then
         -- parallel
-        if mode == cstDef.DISPATCH_MODE.MESSAGE.HTTP then
-            -- http use capture_multi
-            return parallelHTTPHandler(content)
+        if mode == cstDef.DISPATCH_MODE.MESSAGE.CAPTURE then
+            -- use capture multi
+            return captureMultiDispatcher(content)
         end
 
         return parallel(dispatcher, content)

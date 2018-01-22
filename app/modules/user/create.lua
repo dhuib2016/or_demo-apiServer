@@ -32,7 +32,6 @@ return function()
         content.serverName = "nameServer"
 		local createNameResp = schedule(mode, content)
 		if not createNameResp then
-			-- todo: think about rollback
 			res:status(HTTP_INTERNAL_SERVER_ERROR):send("create name failed!")
 			return
 		end

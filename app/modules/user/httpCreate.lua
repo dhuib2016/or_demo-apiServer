@@ -1,58 +1,42 @@
 -- function reference
-local HTTP_OK = ngx.HTTP_OK
 local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
 local HTTP_CREATED = ngx.HTTP_CREATED
-local log = ngx.log
-local WARN = ngx.WARN
 --include
-local http = require("resty.http")
+local cstDef = require("src.define.const")
+local schedule = require("scheduler.index")
 
 return function()
     return function(req, res)
-        local httpc = http.new()
+        local mode = cstDef.DISPATCH_MODE.MESSAGE.HTTP
         local params = req.query
+        local content = {}
 
-        local createIdUri = "http://127.0.0.1:29528/createId"
-        local createIdParams = {
+        content.uri = "http://127.0.0.1:29528/createId"
+        content.request = {
             method = "POST",
             body = "id = "..params.id
         }
-        local createIdResp, createIdErr =
-            httpc:request_uri(createIdUri, createIdParams)
-        if not createIdResp then
-            log(WARN, "create id failed: ", createIdErr)
-            res:status(HTTP_INTERNAL_SERVER_ERROR):send("create id failed!")
-            return
-        end
+        local createIdResp = schedule(mode, content)
+		if not createIdResp then
+			res:status(HTTP_INTERNAL_SERVER_ERROR):send("create id failed!")
+			return
+		end
 
-        local createIdStatus = createIdResp.status
-        if createIdStatus ~= HTTP_OK then
-            log(WARN, "create id failed: ", createIdStatus)
-            res:status(HTTP_INTERNAL_SERVER_ERROR):send("create id failed!")
-            return
-        end
-
-        local createNameUri = "http://127.0.0.1:29529/createName"
-        local createNameParams = {
+        content.uri = "http://127.0.0.1:29529/createName"
+        content.request = {
             method = "POST",
             args = "name = "..params.name
         }
-        local createNameResp, createNameErr =
-            httpc:request_uri(createNameUri, createNameParams)
-        if not createNameResp then
-            log(WARN, "create name failed: ", createNameErr)
-            res:status(HTTP_INTERNAL_SERVER_ERROR):send("create name failed!")
-            return
-        end
+        local createNameResp = schedule(mode, content)
+		if not createNameResp then
+			res:status(HTTP_INTERNAL_SERVER_ERROR):send("create name failed!")
+			return
+		end
 
-        local createNameStatus = createNameResp.status
-        if createNameStatus ~= HTTP_OK then
-            log(WARN, "create id failed: ", createNameStatus)
-            res:status(HTTP_INTERNAL_SERVER_ERROR):send("create name failed!")
-            return
-        end
-
-        local resp = createIdResp.body..", "..createNameResp.body
-        res:status(HTTP_CREATED):send(resp)
+        local createIdCode = createIdResp.code
+        local createNameCode = createNameResp.code
+	    local resp = "createId Code:"..createIdCode
+        resp = resp.." createName Code:"..createNameCode
+	    res:status(HTTP_CREATED):send(resp)
     end
 end

@@ -15,7 +15,7 @@ return function(params)
 
     local request = params.request
     if type(request) ~= "table" or not next(request) then
-        log(WARN, "invalid server request")
+        log(WARN, "invalid request")
 		return nil
     end
 

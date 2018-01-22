@@ -4,8 +4,7 @@ local next = next
 local log = ngx.log
 local WARN = ngx.WARN
 local HTTP_OK = ngx.HTTP_OK
--- include
-local http = require("resty.http")
+local capture = ngx.location.capture
 
 return function(params)
     if not params or not params.uri or not params.request then
@@ -19,16 +18,10 @@ return function(params)
 		return nil
     end
 
-	local httpClient = http.new()
-	local ret, err = httpClient:request_uri(params.uri, request)
-    if not ret then
-        log(WARN, "http request failed: ", err)
-        return nil
-    end
-
+	local ret = capture(params.uri, request)
     local status = ret.status
     if status ~= HTTP_OK then
-        log(WARN, "bad http request: ", status)
+        log(WARN, "capture failed: ", status)
         return nil
     end
 
