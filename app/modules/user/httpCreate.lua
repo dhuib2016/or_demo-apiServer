@@ -25,7 +25,7 @@ return function()
         content.uri = "http://127.0.0.1:29529/createName"
         content.request = {
             method = "POST",
-            args = "name = "..params.name
+            body = "name = "..params.name
         }
         local createNameResp = schedule(mode, content)
 		if not createNameResp then

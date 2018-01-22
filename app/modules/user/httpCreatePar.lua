@@ -24,7 +24,7 @@ return function()
         c2.uri = "http://127.0.0.1:29529/createName"
         c2.request= {
             method = "POST",
-            args = "name = "..params.name
+            body = "name = "..params.name
         }
         local createNameIndex = 2
         contents[createNameIndex] = c2

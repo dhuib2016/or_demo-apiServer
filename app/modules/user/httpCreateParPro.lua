@@ -16,7 +16,7 @@ return function()
         c1[1] = "http://127.0.0.1:29528/createId"
         c1[2] = {
             method = HTTP_POST,
-            body = { id = params.id }
+            args = { id = params.id }
         }
         local createIdIndex = 1
         contents[createIdIndex] = c1
