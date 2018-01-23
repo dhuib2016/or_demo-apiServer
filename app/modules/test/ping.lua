@@ -12,10 +12,7 @@ return function()
         local mode = cstDef.DISPATCH_MODE.MESSAGE.TCP
 		local content = {}
         content.request = {
-		    id = msgDef.MESSAGE_PING,
-		    body = {
-			    seq = req.query.seq
-		    }
+		    msgDef.MESSAGE_PING, { seq = req.query.seq }
 	    }
         content.serverName = "testServer"
 		local pingResp = schedule(mode, content)
