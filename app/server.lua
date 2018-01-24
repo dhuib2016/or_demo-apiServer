@@ -1,6 +1,6 @@
 local string_find = string.find
 local lor = require("lor.index")
-local router = require("app.router")
+local router = require("router")
 local app = lor()
 
 -- 模板配置
@@ -21,7 +21,7 @@ app:use(mw_session({
 }))]]
 
 -- 自定义中间件1: 注入一些全局变量供模板渲染使用
-local mw_inject_version = require("app.middleware.inject_app_info")
+local mw_inject_version = require("middleware.inject_app_info")
 app:use(mw_inject_version())
 
 -- 自定义中间件2: 设置响应头

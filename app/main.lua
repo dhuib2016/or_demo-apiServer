@@ -1,2 +1,2 @@
-local app = require("app.server")
+local app = require("server")
 app:run()
