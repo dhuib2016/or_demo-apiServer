@@ -2,7 +2,7 @@
 local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
 local HTTP_OK = ngx.HTTP_OK
 --include
-local cstDef = require("src.define.const")
+local cstDef = require("define.const")
 local schedule = require("scheduler.index")
 
 return function()
