@@ -11,8 +11,12 @@ return function(app)
     -- todo:auto read files and require them under routes/
 	-- test
 	-- group router mapping a coarse-grained client request
-	app:use("/test", testRouter())
+	-- app:use("/test", testRouter())
 	-- a default error handler for a group router
-	app:erruse("/test", testErrHandler())
+	-- app:erruse("/test", testErrHandler())
+
+    -- do not use route tree
+    testRouter(app, "/test")
+    app:erruse("/test", testErrHandler())
 end
 

@@ -36,10 +36,8 @@ return function()
 			return
 		end
 
-        local createIdCode = createIdResp.code
-        local createNameCode = createNameResp.code
-	    local resp = "createId Code:"..createIdCode
-        resp = resp.." createName Code:"..createNameCode
+        local resp = "createId Code:"..createIdResp.code..", Id:"..createIdResp.body.id
+        resp = resp.." createName Code:"..createNameResp.code..", Name:"..createNameResp.body.name
 	    res:status(HTTP_CREATED):send(resp)
     end
 end
