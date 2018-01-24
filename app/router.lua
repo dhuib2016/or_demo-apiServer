@@ -1,5 +1,5 @@
-local testRouter = require("routes.test")
-local testErrHandler = require("modules.test.errHandler")
+local testRouter = require("routes.test.index")
+local testErrHandler = require("routes.test.errHandler")
 
 return function(app)
     -- special router
@@ -8,6 +8,7 @@ return function(app)
         res:send("welcome to OR framework.")
     end)
 
+    -- todo:auto read files and require them under routes/
 	-- test
 	-- group router mapping a coarse-grained client request
 	app:use("/test", testRouter())
