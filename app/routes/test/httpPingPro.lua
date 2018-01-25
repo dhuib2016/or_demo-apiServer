@@ -11,7 +11,7 @@ return function()
         local mode = cstDef.DISPATCH_MODE.MESSAGE.CAPTURE
         
         local content = {}
-        content.uri = "/ping"
+        content.uri = "/pingPro"
         content.request = {
             method = HTTP_POST,
             args = req.query
