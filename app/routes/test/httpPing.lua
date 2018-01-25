@@ -6,12 +6,13 @@ local cstDef = require("define.const")
 local schedule = require("scheduler.index")
 
 return function()
-    return function(_, res)
+    return function(req, res)
         local mode = cstDef.DISPATCH_MODE.MESSAGE.HTTP
-
+        local params = req.query
+        
         local content = {}
         content.uri = "http://127.0.0.1:29527/ping"
-        content.forward = true
+        content.request = { body = "seq = "..params.seq }
         local pingResp = schedule(mode, content)
         if not pingResp then
             res:status(HTTP_INTERNAL_SERVER_ERROR):send("ping failed!")
