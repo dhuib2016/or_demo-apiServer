@@ -24,12 +24,6 @@ return function()
 			return
 		end
 
-	    -- todo:check ngx default status
-        local code = pingResp.code
-	    local resp = "code:"..code
-        if code == ec.SUCC then
-            resp = resp.." response:"..pingResp.body.ack
-        end
-	    res:status(HTTP_OK):send(resp)
+	    res:json(pingResp)
     end
 end

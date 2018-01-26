@@ -52,8 +52,12 @@ return function()
 			return
         end
 
-	    local resp = "createId Code:"..createIdResp.code..", Id:"..createIdResp.body.id
-        resp = resp.." createName Code:"..createNameResp.code..", Name:"..createNameResp.body.name
-	    res:status(HTTP_CREATED):send(resp)
+	    local resp = {
+            ["createId Code"] = createIdResp.code,
+            Id = createIdResp.body.id,
+            ["createName Code"] = createNameResp.code,
+            Name = createNameResp.body.name
+        }
+        res:status(HTTP_CREATED):send(resp)
     end
 end
