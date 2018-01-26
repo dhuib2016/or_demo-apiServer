@@ -1,11 +1,9 @@
 -- function reference
 local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
-local HTTP_OK = ngx.HTTP_OK
 -- include
 local cstDef = require("define.const")
 local msgDef = require("define.message")
 local schedule = require("scheduler.index")
-local ec = require("define.errorCode")
 
 return function()
     return function(req, res)
