@@ -14,7 +14,7 @@ return function()
         content.uri = "/pingPro"
         content.request = {
             method = HTTP_POST,
-            args = req.query
+            body = req.query
         }
         local pingResp = schedule(mode, content)
 		if not pingResp then
@@ -22,6 +22,6 @@ return function()
 			return
 		end
 
-	    res:status(HTTP_OK):send(pingResp)
+	    res:json(pingResp)
     end
 end

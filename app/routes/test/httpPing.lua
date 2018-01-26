@@ -18,6 +18,6 @@ return function()
             return
         end
 
-	    res:status(HTTP_OK):send(pingResp)
+	    res:json(pingResp)
     end
 end
