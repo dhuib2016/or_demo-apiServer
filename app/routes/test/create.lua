@@ -38,10 +38,10 @@ return function()
 
         local resp = {
             ["createId Code"] = createIdResp.code,
-            Id = createIdResp.body.id,
+            id = createIdResp.body and createIdResp.body.id,
             ["createName Code"] = createNameResp.code,
-            Name = createNameResp.body.name
+            name = createNameResp.body and createNameResp.body.name
         }
-        res:status(HTTP_CREATED):send(resp)
+        res:status(HTTP_CREATED):json(resp)
     end
 end
