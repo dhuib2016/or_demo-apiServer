@@ -10,7 +10,7 @@
 # sh start.sh -- use conf/nginx-dev.conf to start OpenResty
 #####################################################################
 
-export PATH=$PATH:/home/cuis/OR-selfDev/bin
+export PATH=$PATH:/home/cuis/OR/bin
 export LD_LIBRARY_PATH=/home/cuis/Dep/glibc-build-2.14
 
 if [ -n "$1" ];then

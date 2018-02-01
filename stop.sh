@@ -10,7 +10,7 @@
 # sh stop.sh -- use conf/nginx-dev.conf to stop OpenResty
 #####################################################################
 
-export PATH=$PATH:/home/cuis/OR-selfDev/bin
+export PATH=$PATH:/home/cuis/OR/bin
 
 if [ -n "$1" ];then
     PROFILE="$1"
