@@ -21,7 +21,7 @@ fi
 
 # todo:check $1 with ${PROFILE}-nginx.conf
 
-mkdir -p logs & mkdir -p tmp
+mkdir -p logs & mkdir -p logs/old_logs & mkdir -p tmp
 # todo:if there already has logs, then move them to oldlogs/
 
 echo "start OR application with profile: "${PROFILE}
