@@ -1,5 +1,5 @@
-local testRouter = require("routes.test.index")
-local testErrHandler = require("routes.test.errHandler")
+local testRouter = require("handlers.test.index")
+local testErrHandler = require("handlers.test.errHandler")
 
 return function(app)
     -- special router
