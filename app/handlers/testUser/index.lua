@@ -1,7 +1,7 @@
 local autoRequire = require("handlers.autoRequire")
 
 return function(app)
-    local requireTable = autoRequire("/handlers/testUser/")
+    local requireTable = autoRequire("/app/handlers/testUser/")
 
     app:post("/testUser/login", requireTable.auth.login())
     app:post("/testUser/chgPwd", requireTable.auth.chgPwd())
