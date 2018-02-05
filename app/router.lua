@@ -1,5 +1,4 @@
 local testRouter = require("handlers.test.index")
-local testErrHandler = require("handlers.test.errHandler")
 
 return function(app)
     -- special router
@@ -11,6 +10,5 @@ return function(app)
 	-- test
     -- do not use route tree
     testRouter(app)
-    app:erruse("/test", testErrHandler())
 end
 

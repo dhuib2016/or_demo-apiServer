@@ -1,0 +1,2 @@
+--get({attr}) return info
+--set({attr = val, ...}) return status 
