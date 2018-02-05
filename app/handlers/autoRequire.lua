@@ -25,12 +25,14 @@ local handler = function(fullPathFile, fileName, requireTable)
 end
 
 local autoRequire
-autoRequire = function()
-    local curPath = lfs.currentdir()
+autoRequire = function(suffix, path)
+    if suffix then
+        path = lfs.currentdir()..suffix
+    end
     local requireTable = {}
-    for f in lfs.dir(curPath) do
+    for f in lfs.dir(path) do
         if f ~= "." and f ~= ".." then
-            local fullPathFile = curPath.."/"..f
+            local fullPathFile = path.."/"..f
             local attr, err = lfs.attributes(fullPathFile)
             if attr then
                 local mode = attr.mode

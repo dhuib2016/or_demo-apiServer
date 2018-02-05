@@ -12,7 +12,7 @@
 local autoRequire = require("handlers.autoRequire")
 
 return function(app)
-    local requireTable = autoRequire()
+    local requireTable = autoRequire("handlers/test")
 
     app:get("/test/hello", requireTable.hello())
 

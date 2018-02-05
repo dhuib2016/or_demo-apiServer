@@ -4,6 +4,6 @@ local WARN = ngx.WARN
 
 return function()
 	return function(err)
-		log(WARN, "/user err: ", err)
+		log(WARN, "/testUser err: ", err)
 	end
 end
