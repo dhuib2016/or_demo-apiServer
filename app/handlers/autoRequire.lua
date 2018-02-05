@@ -3,6 +3,7 @@ local log = ngx.log
 local WARN = ngx.WARN
 local match = ngx.re.match
 local gsub = ngx.re.gsub
+local sub = string.sub
 -- include
 local lfs = require("lfs")
 local regex = [[handlers\/\w+\/\w+]]
@@ -21,7 +22,8 @@ local handler = function(fullPathFile, fileName, requireTable)
         return
     end
 
-    requireTable[fileName] = require(requireName)
+    local key = sub(fileName, 1, -5)
+    requireTable[key] = require(requireName)
 end
 
 local autoRequire
