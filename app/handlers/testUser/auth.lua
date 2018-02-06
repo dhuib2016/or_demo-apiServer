@@ -24,8 +24,7 @@ function auth.login()
         else
             req.session.set("accInfo", {
                 id = accInfo.id,
-                type = accInfo.type,
-                lastLoginTime = accInfo.lastLoginTime
+                type = accInfo.type
             })
             return res:json({
                 code = ec.SUCC

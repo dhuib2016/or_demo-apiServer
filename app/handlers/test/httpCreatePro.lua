@@ -14,6 +14,9 @@ return function()
 
         content.uri = "/createId"
         content.request = {
+            header = {
+                contentType = "application/json; charset=utf-8"
+            },
             method = HTTP_POST,
             args = { id = params.id }
         }

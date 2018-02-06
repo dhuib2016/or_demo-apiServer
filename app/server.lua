@@ -1,59 +1,39 @@
-local string_find = string.find
+-- function reference
+-- include
 local lor = require("lor.index")
+local view = require("config.view")
+local applicationInfoMiddleware = require("middleware.applicationInfo")
+local sessionMiddleware = require("lor.lib.middleware.session")
+local validateLoginMiddleware = require("middleware.validateLogin")
 local router = require("router")
+local versionCfg = require("config.version")
+local sessionCfg = require("config.session")
+local whitePathList = require("config.whitePathList")
+
 local app = lor()
 
--- 模板配置
 app:conf("view enable", true)
-app:conf("view engine", "tmpl")
-app:conf("view ext", "html")
-app:conf("view layout", "")
-app:conf("views", "./app/views")
+app:conf("view engine", view.engine)
+app:conf("view ext", view.ext)
+app:conf("view layout", view.layout)
+app:conf("views", view.views)
 
--- session和cookie支持，如果不需要可注释以下配置
---[[local mw_cookie = require("lor.lib.middleware.cookie")
-local mw_session = require("lor.lib.middleware.session")
-app:use(mw_cookie())
-app:use(mw_session({
-    session_key = "__app__", -- the key injected in cookie
-    session_aes_key = "aes_key_for_session", -- should set by yourself
-    timeout = 3600 -- default session timeout is 3600 seconds
-}))]]
+app:use(applicationInfoMiddleware(versionCfg))
+app:use(sessionMiddleware({
+    secret = sessionCfg.secret,
+    timeout = sessionCfg.timeout
+}))
+app:use(validateLoginMiddleware(whitePathList))
 
--- 自定义中间件1: 注入一些全局变量供模板渲染使用
-local mw_inject_version = require("middleware.inject_app_info")
-app:use(mw_inject_version())
+router(app)
 
--- 自定义中间件2: 设置响应头
-app:use(function(req, res, next)
-    res:set_header("X-Powered-By", "Lor framework")
-    next()
-end)
+app:erroruse(function(err, req, res)
+    ngx.log(ngx.WARN, "default error handler: ", err)
 
-router(app) -- 业务路由处理
-
--- 错误处理插件，可根据需要定义多个
-app:erroruse(function(err, req, res, next)
-    ngx.log(ngx.ERR, err)
-
-    if req:is_found() ~= true then
-        if string_find(req.headers["Accept"], "application/json") then
-            res:status(404):json({
-                success = false,
-                msg = "404! sorry, not found."
-            })
-        else
-            res:status(404):send("404! sorry, not found. " .. (req.path or ""))
-        end
+    if req:is_found() then
+        res:status(500):send("server error.")
     else
-        if string_find(req.headers["Accept"], "application/json") then
-            res:status(500):json({
-                success = false,
-                msg = "500! internal error, please check the log."
-            })
-        else
-            res:status(500):send("internal error, please check the log.")
-        end
+        res:status(404):send("404! sorry, not found.")
     end
 end)
 

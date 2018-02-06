@@ -4,6 +4,7 @@ local HTTP_CREATED = ngx.HTTP_CREATED
 -- include
 local cstDef = require("define.const")
 local schedule = require("scheduler.index")
+local utils = require("toolkit.utils")
 
 return function()
     return function(req, res)
@@ -13,19 +14,25 @@ return function()
 
         local c1 = {}
         c1.uri = "http://127.0.0.1:29528/createId"
-        c1.request = {
+        c1.request = utils.json_encode({
+            header = {
+                contentType = "application/json; charset=utf-8"
+            },
             method = "POST",
             body = "id = "..params.id
-        }
+        })
         local createIdIndex = 1
         contents[createIdIndex] = c1
 
         local c2 = {}
         c2.uri = "http://127.0.0.1:29529/createName"
-        c2.request= {
+        c2.request= utils.json_encode({
+            header = {
+                contentType = "application/json; charset=utf-8"
+            },
             method = "POST",
             body = "name = "..params.name
-        }
+        })
         local createNameIndex = 2
         contents[createNameIndex] = c2
 
