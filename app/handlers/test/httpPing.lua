@@ -11,12 +11,13 @@ return function()
 
         local content = {}
         content.uri = "http://127.0.0.1:29527/ping"
-        content.request = utils.json_encode({
-            header = {
-                contentType = "application/json; charset=utf-8"
+        content.request = {
+            headers = {
+                ["Content-Type"] = "application/json; charset=utf-8"
             },
-            body = req.query
-        })
+            method = "GET",
+            body = utils.json_encode(req.query)
+        }
         local pingResp = schedule(mode, content)
         if not pingResp then
             res:status(HTTP_INTERNAL_SERVER_ERROR):send("ping failed!")

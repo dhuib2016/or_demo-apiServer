@@ -14,25 +14,25 @@ return function()
 
         local c1 = {}
         c1.uri = "http://127.0.0.1:29528/createId"
-        c1.request = utils.json_encode({
+        c1.request = {
             header = {
                 contentType = "application/json; charset=utf-8"
             },
             method = "POST",
-            body = "id = "..params.id
-        })
+            body = utils.json_encode({ id = params.id })
+        }
         local createIdIndex = 1
         contents[createIdIndex] = c1
 
         local c2 = {}
         c2.uri = "http://127.0.0.1:29529/createName"
-        c2.request= utils.json_encode({
+        c2.request= {
             header = {
                 contentType = "application/json; charset=utf-8"
             },
             method = "POST",
-            body = "name = "..params.name
-        })
+            body = utils.json_encode({ name = params.name })
+        }
         local createNameIndex = 2
         contents[createNameIndex] = c2
 

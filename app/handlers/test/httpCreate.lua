@@ -13,13 +13,13 @@ return function()
         local content = {}
 
         content.uri = "http://127.0.0.1:29528/createId"
-        content.request = utils.json_encode({
+        content.request = {
             header = {
                 contentType = "application/json; charset=utf-8"
             },
             method = "POST",
-            body = "id = "..params.id
-        })
+            body = utils.json_encode({ id = params.id })
+        }
         local createIdResp = schedule(mode, content)
 		if not createIdResp then
 			res:status(HTTP_INTERNAL_SERVER_ERROR):send("create id failed!")
@@ -27,13 +27,13 @@ return function()
 		end
 
         content.uri = "http://127.0.0.1:29529/createName"
-        content.request = utils.json_encode({
+        content.request = {
             header = {
                 contentType = "application/json; charset=utf-8"
             },
             method = "POST",
-            body = "name = "..params.name
-        })
+            body = utils.json_encode({ name = params.name })
+        }
         local createNameResp = schedule(mode, content)
 		if not createNameResp then
 			res:status(HTTP_INTERNAL_SERVER_ERROR):send("create name failed!")
