@@ -26,6 +26,6 @@ return function()
             return
         end
 
-	    res:json(pingResp)
+	    res:json(pingResp.body)
     end
 end
