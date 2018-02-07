@@ -1,5 +1,5 @@
 return {
     "^/index$", -- main page
-    "^/test$",  -- test
+    "^/test",  -- test
     "^/testUser/login$" -- login page
 }
