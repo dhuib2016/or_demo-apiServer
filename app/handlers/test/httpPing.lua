@@ -14,7 +14,7 @@ return function()
         local body = utils.json_encode(req.query)
         content.request = {
             headers = {
-                ["Content-Type"] = "application/json; charset=utf-8"
+                ["Content-Type"] = "application/json; charset=utf-8",
                 ["Content-Length"] = #body
             },
             method = "GET",
