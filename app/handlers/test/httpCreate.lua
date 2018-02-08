@@ -1,5 +1,4 @@
 -- function reference
-local concat = table.concat
 local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
 local HTTP_CREATED = ngx.HTTP_CREATED
 --include
@@ -41,7 +40,7 @@ return function()
 			return
 		end
 
-        local resp = concat(createIdResp, createNameResp)
-        res:status(HTTP_CREATED):send(resp)
+        local resp = { createIdResp, createNameResp }
+        res:status(HTTP_CREATED):json(resp)
     end
 end
