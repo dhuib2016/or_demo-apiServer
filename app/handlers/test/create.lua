@@ -5,17 +5,15 @@ local HTTP_CREATED = ngx.HTTP_CREATED
 local cstDef = require("define.const")
 local msgDef = require("define.message")
 local schedule = require("scheduler.index")
-local utils = require("toolkit.utils")
 
 return function()
     return function(req, res)
-        utils.print_table(req.query)
         local mode = cstDef.DISPATCH_MODE.MESSAGE.TCP
         local content = {}
         content.request = {
 		    id = msgDef.MESSAGE_CREATE_ID,
 		    body = {
-			    id = req.query.id
+			    id = req.body.id
 		    }
 	    }
         content.serverName = "idServer"
@@ -28,7 +26,7 @@ return function()
         content.request = {
 		    id = msgDef.MESSAGE_CREATE_NAME,
 		    body = {
-			    name = req.query.name
+			    name = req.body.name
 		    }
 	    }
         content.serverName = "nameServer"
@@ -38,12 +36,6 @@ return function()
 			return
 		end
 
-        local resp = {
-            ["createId Code"] = createIdResp.code,
-            id = createIdResp.body and createIdResp.body.id,
-            ["createName Code"] = createNameResp.code,
-            name = createNameResp.body and createNameResp.body.name
-        }
-        res:status(HTTP_CREATED):json(resp)
+        res:status(HTTP_CREATED):json({createIdResp, createNameResp})
     end
 end
