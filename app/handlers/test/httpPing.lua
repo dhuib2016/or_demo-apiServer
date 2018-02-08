@@ -3,10 +3,9 @@ local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
 --include
 local cstDef = require("define.const")
 local schedule = require("scheduler.index")
-local utils = require("toolkit.utils")
 
 return function()
-    return function(req, res)
+    return function(_, res)
         local mode = cstDef.DISPATCH_MODE.MESSAGE.HTTP
 
         local content = {}

@@ -1,16 +1,12 @@
 -- function reference
 local HTTP_INTERNAL_SERVER_ERROR = ngx.HTTP_INTERNAL_SERVER_ERROR
-local HTTP_GET = ngx.HTTP_GET
 -- include
 local cstDef = require("define.const")
 local schedule = require("scheduler.index")
 
 return function()
-    return function(req, res)
+    return function(_, res)
         local mode = cstDef.DISPATCH_MODE.MESSAGE.CAPTURE
-        
-        ngx.log(ngx.WARN, "@@debug_info@@1:", ngx.var.request_uri)
-        ngx.log(ngx.WARN, "@@debug_info@@2:", ngx.var.uri)
 
         local content = {}
         content.uri = "/pingPro"

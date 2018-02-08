@@ -5,9 +5,11 @@ local HTTP_CREATED = ngx.HTTP_CREATED
 local cstDef = require("define.const")
 local msgDef = require("define.message")
 local schedule = require("scheduler.index")
+local utils = require("toolkit.utils")
 
 return function()
     return function(req, res)
+        utils.print_table(req.query)
         local mode = cstDef.DISPATCH_MODE.MESSAGE.TCP
         local content = {}
         content.request = {

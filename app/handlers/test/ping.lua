@@ -6,7 +6,7 @@ local msgDef = require("define.message")
 local schedule = require("scheduler.index")
 
 return function()
-    return function(req, res)
+    return function(_, res)
         local mode = cstDef.DISPATCH_MODE.MESSAGE.TCP
 		local content = {}
         content.request = { id = msgDef.MESSAGE_PING }
