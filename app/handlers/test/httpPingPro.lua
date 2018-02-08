@@ -8,6 +8,9 @@ local schedule = require("scheduler.index")
 return function()
     return function(req, res)
         local mode = cstDef.DISPATCH_MODE.MESSAGE.CAPTURE
+        
+        ngx.log(ngx.WARN, "@@debug_info@@1:", ngx.var.request_uri)
+        ngx.log(ngx.WARN, "@@debug_info@@2:", ngx.var.uri)
 
         local content = {}
         content.uri = "/pingPro"
