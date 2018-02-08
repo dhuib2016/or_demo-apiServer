@@ -10,12 +10,11 @@ return function()
         local mode = cstDef.DISPATCH_MODE.MESSAGE.HTTP
 
         local content = {}
-        content.uri = "http://127.0.0.1:29527/ping?seq=13"
+        content.uri = "http://127.0.0.1:29527/ping"
         content.request = {
             headers = {
                 ["Content-Type"] = "application/json; charset=utf-8"
-            },
-            body = ""
+            }
         }
         local pingResp = schedule(mode, content)
         if not pingResp then
