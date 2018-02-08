@@ -11,7 +11,9 @@ return function()
 
         local content = {}
         content.uri = "/pingPro?seq=13"
-        content.request = {}
+        content.request = {
+            body = ""
+        }
         local pingResp = schedule(mode, content)
 		if not pingResp then
 			res:status(HTTP_INTERNAL_SERVER_ERROR):send("ping failed!")
