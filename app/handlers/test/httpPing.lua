@@ -11,14 +11,12 @@ return function()
 
         local content = {}
         content.uri = "http://127.0.0.1:29527/ping"
-        local body = ""
         content.request = {
             headers = {
-                ["Content-Type"] = "application/json; charset=utf-8",
-                ["Content-Length"] = #body
+                ["Content-Type"] = "application/json; charset=utf-8"
             },
             method = "GET",
-            body = body
+            body = ""
         }
         local pingResp = schedule(mode, content)
         if not pingResp then
