@@ -21,7 +21,7 @@ fi
 # todo:check $1 with ${PROFILE}-nginx.pid
 
 echo "stop OR application with profile: "${PROFILE}
-openresty -s quit -p `pwd`/ -c conf/nginx-${PROFILE}.conf
+openresty -s quit -p $(pwd)/ -c conf/nginx-${PROFILE}.conf
 
 baklogs="logs/old_logs/$(date +'%Y%m%d_%H%M%S')"
 mkdir -p ${baklogs}
