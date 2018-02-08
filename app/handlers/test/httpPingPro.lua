@@ -10,10 +10,8 @@ return function()
         local mode = cstDef.DISPATCH_MODE.MESSAGE.CAPTURE
 
         local content = {}
-        content.uri = "/pingPro"
-        content.request = {
-            method = HTTP_GET
-        }
+        content.uri = "/pingPro?seq=13"
+        content.request = {}
         local pingResp = schedule(mode, content)
 		if not pingResp then
 			res:status(HTTP_INTERNAL_SERVER_ERROR):send("ping failed!")
