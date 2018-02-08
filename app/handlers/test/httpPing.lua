@@ -15,8 +15,7 @@ return function()
             headers = {
                 ["Content-Type"] = "application/json; charset=utf-8"
             },
-            method = "GET",
-            body = ""
+            method = "GET"
         }
         local pingResp = schedule(mode, content)
         if not pingResp then
