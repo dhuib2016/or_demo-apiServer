@@ -13,7 +13,7 @@ return function()
         content.uri = "/pingPro"
         content.request = {
             method = HTTP_GET,
-            args = req.query
+            args = {}
         }
         local pingResp = schedule(mode, content)
 		if not pingResp then

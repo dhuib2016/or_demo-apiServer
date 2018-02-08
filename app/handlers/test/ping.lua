@@ -9,12 +9,7 @@ return function()
     return function(req, res)
         local mode = cstDef.DISPATCH_MODE.MESSAGE.TCP
 		local content = {}
-        content.request = {
-		    id = msgDef.MESSAGE_PING,
-		    body = {
-			    seq = req.query.seq
-		    }
-	    }
+        content.request = { id = msgDef.MESSAGE_PING }
         content.serverName = "testServer"
 		local pingResp = schedule(mode, content)
 		if not pingResp then
