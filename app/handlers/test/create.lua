@@ -9,11 +9,13 @@ local schedule = require("scheduler.index")
 return function()
     return function(req, res)
         local mode = cstDef.DISPATCH_MODE.MESSAGE.TCP
+        local params = req.body
         local content = {}
+
         content.request = {
 		    id = msgDef.MESSAGE_CREATE_ID,
 		    body = {
-			    id = req.body.id
+			    id = params.id
 		    }
 	    }
         content.serverName = "idServer"
@@ -26,7 +28,7 @@ return function()
         content.request = {
 		    id = msgDef.MESSAGE_CREATE_NAME,
 		    body = {
-			    name = req.body.name
+			    name = params.name
 		    }
 	    }
         content.serverName = "nameServer"

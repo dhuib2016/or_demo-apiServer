@@ -9,8 +9,8 @@ local schedule = require("scheduler.index")
 return function()
     return function(req, res)
         local mode = cstDef.DISPATCH_MODE.MESSAGE.TCP
+        local params = req.body
         local contents = {}
-        local params = req.query
 
         local c1 = {}
         c1.request = {
@@ -52,12 +52,6 @@ return function()
 			return
         end
 
-	    local resp = {
-            ["createId Code"] = createIdResp.code,
-            id = createIdResp.body and createIdResp.body.id,
-            ["createName Code"] = createNameResp.code,
-            name = createNameResp.body and createNameResp.body.name
-        }
-        res:status(HTTP_CREATED):json(resp)
+	    res:status(HTTP_CREATED):json({createIdResp, createNameResp})
     end
 end
