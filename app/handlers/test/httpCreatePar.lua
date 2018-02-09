@@ -48,7 +48,7 @@ return function()
 			return
         end
 
-	    local resp = { createIdResp, createNameResp }
+	    local resp = { createIdResp.body, createNameResp.body }
         res:status(HTTP_CREATED):json(resp)
     end
 end
