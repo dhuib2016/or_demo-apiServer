@@ -48,7 +48,7 @@ return function()
 			return
         end
 
-	    local resp = createIdResp..", "..createNameResp
+	    local resp = { createIdResp, createNameResp }
         res:status(HTTP_CREATED):send(resp)
     end
 end

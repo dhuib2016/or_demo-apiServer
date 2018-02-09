@@ -9,14 +9,11 @@ local schedule = require("scheduler.index")
 return function()
     return function(req, res)
         local mode = cstDef.DISPATCH_MODE.MESSAGE.CAPTURE
-        local params = req.query
+        local params = req.body
         local content = {}
 
         content.uri = "/createId"
         content.request = {
-            header = {
-                contentType = "application/json; charset=utf-8"
-            },
             method = HTTP_POST,
             args = { id = params.id }
         }
@@ -37,7 +34,7 @@ return function()
 			return
 		end
 
-        local resp = createIdResp..", "..createNameResp
-        res:status(HTTP_CREATED):send(resp)
+        local resp = { createIdResp, createNameResp }
+        res:status(HTTP_CREATED):json(resp)
     end
 end

@@ -9,15 +9,12 @@ local utils = require("toolkit.utils")
 return function()
     return function(req, res)
         local mode = cstDef.DISPATCH_MODE.MESSAGE.HTTP
-        local params = req.query
+        local params = req.body
         local contents = {}
 
         local c1 = {}
         c1.uri = "http://127.0.0.1:29528/createId"
         c1.request = {
-            header = {
-                contentType = "application/json; charset=utf-8"
-            },
             method = "POST",
             body = utils.json_encode({ id = params.id })
         }
@@ -27,9 +24,6 @@ return function()
         local c2 = {}
         c2.uri = "http://127.0.0.1:29529/createName"
         c2.request= {
-            header = {
-                contentType = "application/json; charset=utf-8"
-            },
             method = "POST",
             body = utils.json_encode({ name = params.name })
         }
@@ -55,6 +49,6 @@ return function()
         end
 
 	    local resp = { createIdResp, createNameResp }
-        res:status(HTTP_CREATED):send(resp)
+        res:status(HTTP_CREATED):json(resp)
     end
 end
