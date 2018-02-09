@@ -1,7 +1,7 @@
-local HTTP_OK = ngx.HTTP_OK
-
+-- function reference
+-- include
 return function()
-    return function(req, res)
-	    res:status(HTTP_OK):send("hello too!")
+    return function(_, res)
+	    res:send("hello too!")
     end
 end
