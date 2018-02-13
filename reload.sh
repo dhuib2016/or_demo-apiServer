@@ -16,7 +16,10 @@ else
     PROFILE=dev
 fi
 
-# todo:check $1 with ${PROFILE}-nginx.pid
+if [ ! -f tmp/${PROFILE}-nginx.pid.conf ]; then
+    echo "invalid profile: "${PROFILE}
+    exit 1
+fi
 
 baklogs="logs/old_logs/$(date +'%Y%m%d_%H%M%S')"
 mkdir -p ${baklogs}

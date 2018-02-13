@@ -18,7 +18,10 @@ else
     PROFILE=dev
 fi
 
-# todo:check $1 with ${PROFILE}-nginx.pid
+if [ ! -f tmp/${PROFILE}-nginx.pid.conf ]; then
+    echo "invalid profile: "${PROFILE}
+    exit 1
+fi
 
 echo "stop OR application with profile: "${PROFILE}
 openresty -s quit -p $(pwd)/ -c conf/nginx-${PROFILE}.conf

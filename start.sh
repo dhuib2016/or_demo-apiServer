@@ -19,10 +19,18 @@ else
     PROFILE=dev
 fi
 
-# todo:check $1 with ${PROFILE}-nginx.conf
+if [ ! -f conf/nginx-${PROFILE}.conf ]; then
+    echo "invalid profile: "${PROFILE}
+    exit 1
+fi
+
+if [ -d logs/old_logs ]; then
+    baklogs="logs/old_logs/$(date +'%Y%m%d_%H%M%S')"
+    mkdir -p ${baklogs}
+    mv ./logs/*.* ${baklogs}/
+fi
 
 mkdir -p logs & mkdir -p logs/old_logs & mkdir -p tmp
-# todo:if there already has logs, then move them to oldlogs/
 
 echo "start OR application with profile: "${PROFILE}
 openresty -p $(pwd)/ -c conf/nginx-${PROFILE}.conf
