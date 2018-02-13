@@ -24,12 +24,6 @@ if [ ! -f conf/nginx-${PROFILE}.conf ]; then
     exit 1
 fi
 
-if [[ `ls logs -A directory` ]]; then
-    baklogs="logs/old_logs/$(date +'%Y%m%d_%H%M%S')"
-    mkdir -p ${baklogs}
-    mv ./logs/*.* ${baklogs}/
-fi
-
 mkdir -p logs & mkdir -p logs/old_logs & mkdir -p tmp
 
 echo "start OR application with profile: "${PROFILE}
