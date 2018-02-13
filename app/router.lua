@@ -1,6 +1,7 @@
 -- function reference
 -- include
 local testRouter = require("handlers.test.index")
+local testUserRouter = require("handlers.testUser.index")
 
 return function(app)
     -- special router
@@ -12,5 +13,6 @@ return function(app)
 	-- test
     -- do not use route tree
     testRouter(app)
+    testUserRouter(app)
 end
 
