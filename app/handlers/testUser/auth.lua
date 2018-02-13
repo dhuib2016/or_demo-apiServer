@@ -1,7 +1,7 @@
 -- function reference
 -- include
 local ec = require("define.errorCode")
-local account = require("model.user.account")
+local account = require("model.testUser.account")
 
 local auth = {}
 
