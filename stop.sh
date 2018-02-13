@@ -18,7 +18,7 @@ else
     PROFILE=dev
 fi
 
-if [ ! -f tmp/${PROFILE}-nginx.pid.conf ]; then
+if [ ! -f tmp/${PROFILE}-nginx.pid ]; then
     echo "invalid profile: "${PROFILE}
     exit 1
 fi
