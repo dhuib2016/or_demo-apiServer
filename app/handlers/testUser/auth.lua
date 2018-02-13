@@ -12,14 +12,14 @@ function auth.login()
 
         if not accountName or not password or accountName == "" or password == "" then
             return res:json({
-                code = ec.ACCOUNT.INVALID_LOGIN_PARAMS
+                code = ec.TEST.INVALID_LOGIN_PARAMS
             })
         end
 
         local accInfo = account:auth(accountName, password)
         if not accInfo then
             return res:json({
-                code = ec.ACCOUNT.INVALID_ACCNAME_OR_PWD
+                code = ec.TEST.INVALID_ACCNAME_OR_PWD
             })
         else
             req.session.set("accInfo", {
