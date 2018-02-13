@@ -24,7 +24,7 @@ if [ ! -f conf/nginx-${PROFILE}.conf ]; then
     exit 1
 fi
 
-if [ -d logs/old_logs ]; then
+if [[ `ls logs -A directory` ]]; then
     baklogs="logs/old_logs/$(date +'%Y%m%d_%H%M%S')"
     mkdir -p ${baklogs}
     mv ./logs/*.* ${baklogs}/
