@@ -27,8 +27,8 @@ function auth.login()
 
             local accInfo = ret.body
             req.session.set("accInfo", {
-                id = accInfo.id,
-                type = accInfo.type
+                id = accInfo.accId,
+                type = accInfo.accType
             })
             
             res:json({ code = ec.SUCC, body = "welcome~" })
