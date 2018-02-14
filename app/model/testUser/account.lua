@@ -7,6 +7,7 @@ local schedule = require("scheduler.index")
 local account = {}
 
 function account.auth(accountName, password)
+    -- todo:use LRU + SHAREDDIC + RPC cache
     local mode = cstDef.DISPATCH_MODE.MESSAGE.CAPTURE
     local content = {}
     content.uri = "/auth"

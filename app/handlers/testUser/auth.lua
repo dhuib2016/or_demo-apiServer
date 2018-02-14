@@ -16,19 +16,22 @@ function auth.login()
             })
         end
 
-        local accInfo = account.auth(accountName, password)
-        if not accInfo then
-            return res:json({
-                code = ec.TEST.INVALID_ACCNAME_OR_PWD
-            })
+        local ret = account.auth(accountName, password)
+        if not ret then
+            return res:json({ code = ec.INTERNAL_ERROR })
         else
+            if ret.code then
+                -- todo:if need transfer server error code to client error code
+                return res:json({ code = ret.code })
+            end
+
+            local accInfo = ret.body
             req.session.set("accInfo", {
                 id = accInfo.id,
                 type = accInfo.type
             })
-            return res:json({
-                code = ec.SUCC
-            })
+            
+            res:json({ code = ec.SUCC, body = "welcome~" })
         end
     end
 end
