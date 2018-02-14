@@ -33,7 +33,7 @@ function auth.login()
                 type = accInfo.accType
             })
             
-            res:json({ code = ec.SUCC, body = "welcome~" })
+            res:json({ code = ec.SUCC, content = "welcome~" })
         end
     end
 end
