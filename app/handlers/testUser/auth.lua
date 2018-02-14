@@ -16,7 +16,7 @@ function auth.login()
             })
         end
 
-        local accInfo = account:auth(accountName, password)
+        local accInfo = account.auth(accountName, password)
         if not accInfo then
             return res:json({
                 code = ec.TEST.INVALID_ACCNAME_OR_PWD
