@@ -34,9 +34,13 @@ function auth.login()
 end
 
 function auth.logout()
+    return function()
+    end
 end
 
 function auth.chgPwd()
+    return function()
+    end
 end
 
 return auth
