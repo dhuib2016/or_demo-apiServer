@@ -20,12 +20,14 @@ function auth.login()
         if not ret then
             return res:json({ code = ec.INTERNAL_ERROR })
         else
-            if ret.code then
+            local resp = ret.body
+            local ec = resp.code
+            if ec then
                 -- todo:if need transfer server error code to client error code
-                return res:json({ code = ret.code })
+                return res:json({ code = ec })
             end
 
-            local accInfo = ret.body
+            local accInfo = resp.body
             req.session.set("accInfo", {
                 id = accInfo.accId,
                 type = accInfo.accType
