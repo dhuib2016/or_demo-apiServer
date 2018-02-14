@@ -19,7 +19,7 @@ function auth.login()
             return res:json({ code = ec.INTERNAL_ERROR })
         else
             local resp = ret.body
-            if resp.code then
+            if resp.code ~= ec.SUCC then
                 -- todo:if need transfer server error code to client error code
                 return res:json({ code = resp.code })
             end
