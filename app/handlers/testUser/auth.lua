@@ -11,9 +11,7 @@ function auth.login()
         local password = req.body.password
 
         if not accountName or not password or accountName == "" or password == "" then
-            return res:json({
-                code = ec.TEST.INVALID_LOGIN_PARAMS
-            })
+            return res:json({ code = ec.TEST.INVALID_LOGIN_PARAMS })
         end
 
         local ret = account.auth(accountName, password)
@@ -21,19 +19,18 @@ function auth.login()
             return res:json({ code = ec.INTERNAL_ERROR })
         else
             local resp = ret.body
-            local ec = resp.code
-            if ec then
+            if resp.code then
                 -- todo:if need transfer server error code to client error code
-                return res:json({ code = ec })
+                return res:json({ code = resp.code })
             end
 
-            local accInfo = resp.body
+            local accInfo = resp.content
             req.session.set("accInfo", {
                 id = accInfo.accId,
                 type = accInfo.accType
             })
-            
-            res:json({ code = ec.SUCC, content = "welcome~" })
+
+            res:json({ code = ec.SUCC, content = "welcome" })
         end
     end
 end
