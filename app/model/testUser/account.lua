@@ -18,4 +18,16 @@ function account.auth(accountName, password)
     return schedule(mode, content)
 end
 
+function account.register(accountName, password, accountType)
+    -- todo:use LRU + SHAREDDIC + RPC cache
+    local mode = cstDef.DISPATCH_MODE.MESSAGE.CAPTURE
+    local content = {}
+    content.uri = "/register"
+    content.request = {
+        method = HTTP_POST,
+        args = { accountName = accountName, password = password, accountType = accountType }
+    }
+    return schedule(mode, content)
+end
+
 return account
