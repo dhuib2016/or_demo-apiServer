@@ -8,7 +8,7 @@ local account = {}
 
 function account.auth(accountName, password)
     -- todo:use LRU + SHAREDDIC + RPC cache
-    local mode = cstDef.DISPATCH_MODE.MESSAGE.CAPTURE
+    local mode = cstDef.DISPATCH_MODE.MSG.CAPTURE
     local content = {}
     content.uri = "/auth"
     content.request = {
@@ -20,7 +20,7 @@ end
 
 function account.register(accountName, password, accountType)
     -- todo:use LRU + SHAREDDIC + RPC cache
-    local mode = cstDef.DISPATCH_MODE.MESSAGE.CAPTURE
+    local mode = cstDef.DISPATCH_MODE.MSG.CAPTURE
     local content = {}
     content.uri = "/register"
     content.request = {

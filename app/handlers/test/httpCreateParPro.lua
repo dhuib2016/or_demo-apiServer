@@ -8,7 +8,7 @@ local schedule = require("scheduler.index")
 
 return function()
     return function(req, res)
-        local mode = cstDef.DISPATCH_MODE.MESSAGE.CAPTURE
+        local mode = cstDef.DISPATCH_MODE.MSG.CAPTURE
         local params = req.query
         local contents = {}
 

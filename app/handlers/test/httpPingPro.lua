@@ -6,7 +6,7 @@ local schedule = require("scheduler.index")
 
 return function()
     return function(_, res)
-        local mode = cstDef.DISPATCH_MODE.MESSAGE.CAPTURE
+        local mode = cstDef.DISPATCH_MODE.MSG.CAPTURE
 
         local content = {}
         content.uri = "/pingPro"

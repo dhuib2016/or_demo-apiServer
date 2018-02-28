@@ -6,7 +6,7 @@ local schedule = require("scheduler.index")
 
 return function()
     return function(_, res)
-        local mode = cstDef.DISPATCH_MODE.MESSAGE.HTTP
+        local mode = cstDef.DISPATCH_MODE.MSG.HTTP
 
         local content = {}
         content.uri = "http://127.0.0.1:29527/ping"

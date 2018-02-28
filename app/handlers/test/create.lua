@@ -8,7 +8,7 @@ local schedule = require("scheduler.index")
 
 return function()
     return function(req, res)
-        local mode = cstDef.DISPATCH_MODE.MESSAGE.TCP
+        local mode = cstDef.DISPATCH_MODE.MSG.TCP
         local params = req.body
         local content = {}
 

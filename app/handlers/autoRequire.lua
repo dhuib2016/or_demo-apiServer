@@ -9,16 +9,17 @@ local lfs = require("lfs")
 local regex = [[handlers\/\w+\/\w+]]
 
 local handler = function(fullPathFile, fileName, requireTable)
-    local captures, matchErr = match(fullPathFile, regex, "jo")
+    local captures, err = match(fullPathFile, regex, "jo")
     if not captures then
-        log(WARN, fullPathFile, " match \"", regex, "\" failed: ", matchErr or "no match")
+        log(WARN, fullPathFile, " match \"", regex, "\" failed: ", err or "no match")
         return
     end
 
     local capture = captures[0]
-    local requireName, _, gsubErr = gsub(capture, "/", ".", "jo")
+    local requireName, _
+    requireName, _, err = gsub(capture, "/", ".", "jo")
     if not requireName then
-        log(WARN, capture, " gsub / to . failed: ", gsubErr or "no match")
+        log(WARN, capture, " gsub / to . failed: ", err or "no match")
         return
     end
 

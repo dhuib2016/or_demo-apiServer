@@ -8,7 +8,7 @@ local utils = require("toolkit.utils")
 
 return function()
     return function(req, res)
-        local mode = cstDef.DISPATCH_MODE.MESSAGE.HTTP
+        local mode = cstDef.DISPATCH_MODE.MSG.HTTP
         local params = req.body
         local contents = {}
 
