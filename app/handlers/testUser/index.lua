@@ -5,9 +5,8 @@ return function(app)
 
     app:post("/testUser/login", requireTable.auth.login())
     app:get("/testUser/logout", requireTable.auth.logout())
-    app:get("/testUser/register", requireTable.auth.register())
+    app:post("/testUser/register", requireTable.auth.register())
     app:post("/testUser/chgPwd", requireTable.auth.chgPwd())
-    
 
     app:erruse("/testUser", requireTable.errHandler())
 end
